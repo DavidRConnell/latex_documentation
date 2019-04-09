@@ -1,12 +1,17 @@
-#Installation
+# Installation
+
 GEN
+
 MATLAB/Python
+
 	matlab2tikz
 
-#Config
+# Config
+
 Global
+
 Local
 
-#Macros/use
+# Macros/use
 
-#Creating Additional Packages
+# Creating Additional Packages
