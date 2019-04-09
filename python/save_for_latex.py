@@ -6,8 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-PATH_TO_PROJECT = '/Users/davidconnell/Google_Drive/Programs/MyModules/'
-
+PATH_TO_PROJECT = "."
 
 def set_project_path(path_to_project):
     global PATH_TO_PROJECT
