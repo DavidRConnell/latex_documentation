@@ -6,8 +6,8 @@ source ~/.config/docsrc
 time latexmk -pv -xelatex -silent --interaction=nonstopmode $1
 printtexerrors.sh $1
 
-if [ $EXTERNALSAVE ]; then
+if $SAVEEXTERNALLY; then
 	basepath=${$(dirname $1)//\./$PWD}
 	tailfilepath=${basepath#*docs}
 	cp $1.pdf ${EXTERNALLOC}${tailfilepath}.pdf
-done
+fi
