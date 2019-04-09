@@ -8,6 +8,6 @@ printtexerrors.sh $1
 
 if $DOEXPORTPDF; then
 	basepath=${$(dirname $1)//\./$PWD}
-	tailfilepath=${basepath#*docs}
-	cp $1.pdf ${EXPORTLOC}${tailfilepath}.pdf
+	tailfilepath=${basepath#*$DOCDIR}
+	cp $1.pdf ${EXPORTDIR}${tailfilepath}.pdf
 fi
