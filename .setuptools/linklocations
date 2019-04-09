@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function missinglatex {
+	cat <<- _EOF_
+		Package requires LaTeX to be installed
+		_EOF_
+
+	exit 1
+}
+
+TEXDIR=$(kpsewhich -expand-var '$TEXMFHOME') || false
+[ -d $TEXDIR ] || missinglatex
+
+TEXDIR=$TEXDIR/tex/latex
+BINDIR=usr/local/bin
