@@ -13,7 +13,7 @@ mkdir $projname/sections
 sed "s/\_/\\\_/g" > $projname/$projname.tex << _EOF_
 \documentclass{article}
 
-\usepackage{documentation}
+\usepackage{rushdoc}
 
 \setmainfont{$MAINFONT}
 \settitlefont{$TITLEFONT}
