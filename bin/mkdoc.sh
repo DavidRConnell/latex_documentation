@@ -15,8 +15,8 @@ sed "s/\_/\\\_/g" > $projname/$projname.tex << _EOF_
 
 \usepackage{documentation}
 
-\setmainfont[Ligatures=TeX]{$MAINFONT}
-\setsansfont[Ligatures=TeX]{$MAINFONT}
+\setmainfont{$MAINFONT}
+\settitlefont{$TITLEFONT}
 
 \title{$title}
 \author{$AUTHOR \\\\ email:
