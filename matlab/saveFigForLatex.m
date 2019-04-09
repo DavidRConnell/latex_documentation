@@ -1,10 +1,6 @@
 function saveFigForLatex(name, projectPath)
 	% Saves current figure to the figures directory of the project
 	% specified by the projectPath optional.
-	%
-	% matlab2tikz makes a legend even if the figure doesn't contain a
-	% legend. To remove the legend in the tex file set the doClearLegend
-	% flag to true.
 
 	pathToFigures = strcat(projectPath, '/figures');
 	if ~exist(projectPath, 'dir')
