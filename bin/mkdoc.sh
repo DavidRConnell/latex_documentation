@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
-source ./docsrc
+source ~/.config/docsrc
+[ -f $PWD/docsrc ] && source $PWD/docsrc
 
 mkdir $1
 mkdir $1/sections

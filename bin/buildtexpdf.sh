@@ -1,9 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-source ./docsrc
+source ~/.config/docsrc
+[ -f $PWD/docsrc ] && source $PWD/docsrc
 
 time latexmk -pv -xelatex -silent --interaction=nonstopmode $1
-./printtexerrors.sh $1
+printtexerrors.sh $1
 
 if [ $EXTERNALSAVE ]; then
 	basepath=${$(dirname $1)//\./$PWD}
