@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ~/.config/docsrc
-[ -f $PWD/docsrc ] && source $PWD/docsrc
+[ -f ../docsrc ] && source ../docsrc
 
 time latexmk -pv -xelatex -silent --interaction=nonstopmode $1
 printtexerrors.sh $1
