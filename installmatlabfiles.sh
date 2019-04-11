@@ -11,6 +11,4 @@ if [ $# != 1 ]; then
 	exit 1
 fi
 
-for f in $PWD/matlab/*; do
-	ln -s $f $1/${f#*packages/}
-done
+ln -s $PWD/matlab/* $1

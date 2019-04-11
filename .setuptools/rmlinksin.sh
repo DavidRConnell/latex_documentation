@@ -4,7 +4,7 @@
 
 for f in $PWD/$2/*; do
 	l=$1/${f#*$2/}
-	if [[ $(readlink $l)=~$f ]]; then
+	if [[ $(readlink $l) == $f ]]; then
 		rm $l
 	fi
 done

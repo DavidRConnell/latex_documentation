@@ -3,6 +3,7 @@
 source .setuptools/linklocations
 [ -d $TEXLOC/tex/latex ] || mkdir -p $TEXLOC/tex/latex
 
-.setuptools/lncontents.sh packages $TEXDIR
-.setuptools/lncontents.sh bin $BINDIR
+ln -s $PWD/packages/* $TEXDIR
+ln -s $PWD/bin/* $BINDIR
+
 .setuptools/gendocsrc.sh

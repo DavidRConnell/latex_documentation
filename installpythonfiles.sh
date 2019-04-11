@@ -11,6 +11,4 @@ if [ $# != 1 ]; then
 	exit 1
 fi
 
-for f in $PWD/python/*; do
-	ln -s $f $1/${f#*packages/}
-done
+ln -s $PWD/python/* $1
