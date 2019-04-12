@@ -1,6 +1,7 @@
 #!/bin/bash
 
 [ -d ~/.config ] || mkdir ~/.config
+[ -f ~/.config/docsrc ] && exit 0
 
 cat > ~/.config/docsrc <<- _EOF_
 	AUTHOR=
