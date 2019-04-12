@@ -37,8 +37,12 @@
   }{\includegraphics[width=#1]{./figures/#2}}
 }}
 
-% Normal command stacks horizontally; star command sacks vertically.
-\newcommand{\inputsubfigureh}[3][]{
+\makeatletter
+\newcommand{\inputsubfigure}{%
+	\@ifstar\@inputsubfigurev\@inputsubfigureh
+}
+
+\newcommand{\@inputsubfigureh}[3][]{
 	\begin{subfigure}[t]{#2}
 		\centering
 		\addfigure{\textwidth}{#3}
@@ -47,7 +51,7 @@
 	\end{subfigure}%
 }
 
-\newcommand{\inputsubfigurev}[3][]{
+\newcommand{\@inputsubfigurev}[3][]{
 	\begin{subfigure}[t]{#2}
 		\centering
 		\addfigure{\textwidth}{#3}
@@ -55,6 +59,7 @@
 		\caption{\footnotesize#1}
 	\end{subfigure}
 }
+\makeatother
 
 \usepackage{threeparttable}
 \usepackage{booktabs}
