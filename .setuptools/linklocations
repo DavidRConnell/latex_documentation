@@ -12,4 +12,4 @@ TEXDIR=$(kpsewhich -expand-var '$TEXMFHOME') || false
 [ -d $TEXDIR ] || missinglatex
 
 TEXDIR=$TEXDIR/tex/latex
-BINDIR=usr/local/bin
+BINDIR=/usr/local/bin
