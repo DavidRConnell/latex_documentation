@@ -10,8 +10,20 @@ title="$@"
 mkdir $projname
 mkdir $projname/sections
 
+if $USETWOCOLUMN; then
+	column='[twocolumn]'
+else
+	column=''
+fi
+
+if $ADDABSTRACT; then
+	maketitle='\maketitleandabstract{}'
+else
+	maketitle='\maketitle'
+fi
+
 sed "s/\_/\\\_/g" > $projname/$projname.tex << _EOF_
-\documentclass{article}
+\documentclass$column{article}
 
 \usepackage{$DOCTYPE}
 
@@ -24,7 +36,7 @@ sed "s/\_/\\\_/g" > $projname/$projname.tex << _EOF_
 
 \begin{document}
 	\pagenumbering{gobble}
-	\maketitle
+	$maketitle
 
 \end{document}
 _EOF_

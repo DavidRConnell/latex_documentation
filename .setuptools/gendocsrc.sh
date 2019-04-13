@@ -11,6 +11,9 @@ cat > ~/.config/docsrc <<- _EOF_
 	MAINFONT=
 	TITLEFONT=
 
+	USETWOCOLUMN=false
+	ADDABSTRACT=false
+
 	DOEXPORTPDF=false
 	DOCDIR=
 	EXPORTDIR=
