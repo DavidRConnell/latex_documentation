@@ -10,29 +10,34 @@ function saveFigForLatex(name, projectPath)
 	end
 
 	fullPath = strcat(pathToFigures, '/', name, '.tex');
+	hasLegend = ~isempty(findall(gcf, 'type', 'Legend'));
 	cleanfigure;
 	matlab2tikz(fullPath, 'showInfo', false);
+	processoutput(fullPath);
 
-	isLegend = ~isempty(findall(gcf, 'type', 'Legend'));
-	if ~isLegend
-		clearLegend(fullPath)
+	function processoutput(fullPath)
+		fileString = fileread(fullPath);
+		str = unsetSize(fileString);
+		if ~hasLegend
+			str = clearLegend(str);
+		end
+		writeString(str, fullPath);
 	end
 end
 
-function clearLegend(path)
-	fileString = fileread(path);
-	clearedFileString = deleteLegendIn(fileString);
-	writeString(clearedFileString, path);
+function newStr = unsetSize(str)
+	newStr = regexp(str, '(width|height)[^\n]*\n', 'split');
+	newStr = strjoin(newStr, '');
+end
 
-	function newStr = deleteLegendIn(str);
-		newStr = regexp(str, '\\addlegendentry[^\n]*\n', 'split');
-		newStr = regexp(strjoin(newStr, ''), 'legend[^\n]*\n', 'split');
-		newStr = strjoin(newStr, '');
-	end
+function newStr = clearLegend(str)
+	newStr = regexp(str, '\\addlegendentry[^\n]*\n', 'split');
+	newStr = regexp(strjoin(newStr, ''), 'legend[^\n]*\n', 'split');
+	newStr = strjoin(newStr, '');
+end
 
-	function writeString(str, savePath)
-		fid = fopen(savePath, 'w');
-		fprintf(fid, '%s', str);
-		fclose(fid);
-	end
+function writeString(str, savePath)
+	fid = fopen(savePath, 'w');
+	fprintf(fid, '%s', str);
+	fclose(fid);
 end

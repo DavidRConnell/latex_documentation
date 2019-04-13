@@ -3,8 +3,7 @@ tables directory respectively. """
 
 import os
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib as mpl
+import matplotlib2tikz
 
 PATH_TO_PROJECT = "."
 
@@ -16,21 +15,10 @@ def set_project_path(path_to_project):
 def fig(name):
     """ Parameter name (string) should include the subfolder to save it to if one exists. """
 
-    def _setup_mpl():
-        pgf_with_rc_font = {
-            "font.family": "sans-serif",
-            "font.serif": [],
-            "font.monospace":[],
-            "font.sans-serif": [],
-        }
-        mpl.rcParams.update(pgf_with_rc_font)
-
-
-    save_path = PATH_TO_PROJECT + '/figures/' + name + '.pgf'
+    save_path = PATH_TO_PROJECT + '/figures/' + name + '.tex'
     _make_dir_if_missing(save_path)
 
-    _setup_mpl()
-    plt.savefig(save_path, bbox_inches='tight')
+    matplotlib2tikz.save(save_path)
 
 
 def _make_dir_if_missing(path):
