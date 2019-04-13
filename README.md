@@ -12,7 +12,7 @@ To install, cd into the parent directory yon want to use to store the
 package and run:
 
 	git clone https://github.com/DavidRConnell/latex_documentation.git
-	./install
+	./install.sh
 
 This links the shell scripts and LaTeX packages to the appropriate
 locations and generates a docsrc config file in ~/.config.
@@ -23,11 +23,12 @@ figures run the following commands:
 	./installmatlabfiles.sh /path/to/matlab/dir
 	./installpythonfiles.sh /path/to/python/dir
 
-Where the paths should be replaced with the desired locations which should
-be in the matlab/python path or added to it.
+Where the paths should be replaced with the desired locations which need to
+be in the MATLAB/python path or added to it.
 
-Note: The matlab2tikz package is needed for creating LaTeX figures with
-MATLAB
+Note: The [matlab2tikz](https://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz) package is needed for generating tikz figures in MATLAB and the
+[matplotlab2tikz](https://pypi.org/project/matplotlib2tikz/) is needed for
+the python as well as matplotlib and numpy.
 
 ## Config
 
