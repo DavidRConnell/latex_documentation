@@ -4,9 +4,9 @@
 % Example of inputting subfigures. Displays a and b over c.
 % \begin{figure}[ht]
 % \centering
-% 	\inputsubfigureh[caption a]{0.4\textwidth}{figa}
-% 	\inputsubfigureh[caption b]{0.4\textwidth}{figb}
-% 	\inputsubfigurev[caption c]{\figwidth}{figc}
+% 	\inputsubfigure[caption a]{0.4\textwidth}{figa}
+% 	\inputsubfigure*[caption b]{0.4\textwidth}{figb}
+% 	\inputsubfigure[caption c]{\figwidth}{figc}
 % \caption{Combine caption}
 % \end{figure}
 
@@ -47,7 +47,7 @@
 	\begin{subfigure}[t]{#2}
 		\centering
 		\addfigure{\textwidth}{#3}
-		\vspace{-2em}
+		\vspace{-1.5em}
 		\caption{\footnotesize{#1}}
 	\end{subfigure}%
 }
@@ -56,10 +56,9 @@
 	\begin{subfigure}[t]{#2}
 		\centering
 		\addfigure{\textwidth}{#3}
-		\vspace{-2em}
+		\vspace{-1.5em}
 		\caption{\footnotesize#1}
-	\end{subfigure}
-
+	\end{subfigure}\\[1.25em]
 }
 \makeatother
 
