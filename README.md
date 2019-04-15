@@ -150,7 +150,7 @@ At this time the file tree looks like:
 
 Running `buildtexpdf example` should produce example.pdf.
 
-### <a name="addcontent"><\a>Adding content
+### <a name="addcontent"></a>Adding content
 
 Sections added to the sections directory can be input to the project with:
 
@@ -199,6 +199,7 @@ Using MATLAB a sin wave plot and random data can be saved to the example
 project with:
 
 generateFloats.m
+
 	function generateFloats
 		time = 1:0.1:10;
 		wave = sin(2* pi * time * 0.25);
@@ -233,6 +234,7 @@ may be worth creating a wrapper for `saveFigForLatex.m` and
 For example:
 
 saveFigForDocumentation.m
+
 	function saveFigForDocumentation(name, project)
 		% Wrapper for saveFigForLatex to simplify saving to the documentation
 		% directory.
@@ -246,6 +248,7 @@ saveFigForDocumentation.m
 An analogous program for python would be:
 
 generate_floats.py
+
 	import save_for_latex as sfl
 	import matplotlib.pyplot as plt
 	import numpy as np
@@ -296,7 +299,7 @@ then .tex.
 The labels and captions are not required.
 If labels are used `\autoref{fig:ex}` can be used to reference them in the
 text adding the type based on whats before the ":" (see
-[referncing](https://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing)
+[referencing](https://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing)
 for more info).
 
 The star variant of `\inputsubfigure` places the next subfigure on the line
@@ -311,6 +314,7 @@ Adding the floats generated above is down by creating a new section:
 Then adding the following:
 
 section/addingfloats.tex
+
 	Here we try adding some floats to a document.
 
 	\inputfigure[%
@@ -339,6 +343,7 @@ section/addingfloats.tex
 Then the add the new section to the main file:
 
 example.tex
+
 	...
 	\begin{document}
 		\pagenumbering{gobble}
