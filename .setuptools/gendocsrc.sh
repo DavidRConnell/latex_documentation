@@ -11,6 +11,7 @@ cat > ~/.config/docsrc <<- _EOF_
 	MAINFONT=
 	TITLEFONT=
 
+	NUMBERPAGES=false
 	USETWOCOLUMN=false
 	ADDABSTRACT=false
 
