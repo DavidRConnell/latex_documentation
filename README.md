@@ -52,7 +52,7 @@ To add a new directory run:
 This will not be saved once the session ends; add the above line to
 ~/.bashrc or the analogous file for the shell you use.
 
-Note: The [matlab2tikz](https://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz) package is needed for generating tikz figures in MATLAB and the
+**Note:** The [matlab2tikz](https://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz) package is needed for generating tikz figures in MATLAB and the
 [matplotlab2tikz](https://pypi.org/project/matplotlib2tikz/) is needed for
 python in addition to the matplotlib and numpy modules.
 
@@ -150,6 +150,10 @@ At this time the file tree looks like:
 
 Running `buildtexpdf example` should produce example.pdf.
 
+**Note:** Adding a docsrc to example would not make any changes. For settings
+that affect all (and only) projects within ~/documentation a docsrc should
+be added to ~/documentation/docsrc.
+
 ### <a name="addcontent"><\a>Adding content
 
 Sections added to the sections directory can be input to the project with:
@@ -168,7 +172,7 @@ capitalized file name otherwise the optional name is used.
 In addition to the plain `\inputsection` macro, a star version (i.e.
 `\inputsection*{filename}`) exist which does not add a section header.
 
-Note: `inputsection` searches the sections directory by default so there's
+**Note:**: `inputsection` searches the sections directory by default so there's
 no need to prepend sections to the filename nor do you need to add the tex
 extension.
 
