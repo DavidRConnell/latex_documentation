@@ -277,17 +277,17 @@ Including floats in the LaTeX document is done with the `inputfigure`,
 	\begin{figure}[ht]
 		\centering
 		\inputsubfigure[%
-				\label{fig:subfiga}caption for subfig a
-			]{figurewidth}{subfiga}
+			\label{fig:subfiga}caption for subfig a
+		]{figurewidth}{subfiga}
 		\inputsubfigure*[%
-				caption for subfig b
-			]{figurewidth}{subfigb}
+			caption for subfig b
+		]{figurewidth}{subfigb}
 		\inputsubfigure[%
-				caption for subfig c
-			]{figurewidth}{subfigc}
+			caption for subfig c
+		]{figurewidth}{subfigc}
 		\caption{\label{fig:subfigures}%
-				General caption.
-			}
+			General caption.
+		}
 	\end{figure}
 
 Tables are expected to be in ./tables and figures in ./figures.
