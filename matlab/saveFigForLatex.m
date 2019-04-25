@@ -26,7 +26,7 @@ function saveFigForLatex(name, projectPath)
 end
 
 function newStr = unsetSize(str)
-	newStr = regexp(str, '(width|height)[^\n]*\n', 'split');
+	newStr = regexp(str, '(width|height|at)[^\n]*\n', 'split');
 	newStr = strjoin(newStr, '');
 end
 
