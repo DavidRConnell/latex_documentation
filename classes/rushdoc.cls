@@ -1,6 +1,11 @@
-\ProvidesPackage{documentation}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{rushdoc}
 
-\usepackage{paperformat}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions\relax
+\LoadClass{article}
+
+\RequirePackage{paperformat}
 
 \definecolor{rushgreen}{HTML}{1d6f42}
 \definecolor{rushlightblue}{HTML}{436092}

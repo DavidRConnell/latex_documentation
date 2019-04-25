@@ -8,8 +8,8 @@ formatting however, by default these settings must be recreated for each
 document as well as elements within documents, like floats.
 This package generates tex files based on an rc file, leaving you to worry
 only about the documents content.
-Additionally, any template sty package can be used and, with a LaTeX
-background, new packages can be created from those provided.
+Additionally, any template class can be used and, with a LaTeX
+background, new classes can be created from those provided.
 
 ## Installation
 
@@ -20,7 +20,7 @@ package and run:
 	git clone https://github.com/DavidRConnell/latex_documentation.git
 	./install.sh
 
-This links the shell scripts and LaTeX packages to the appropriate
+This links the shell scripts and LaTeX packages and classes to the appropriate
 locations and generates a docsrc resource file in ~/.config.
 
 To install the additional MATLAB and python files for creating tables and
@@ -105,10 +105,10 @@ content](#addcontent)).
 All values consisting of more than one word should be wrapped in "" (and
 all values can be wrapped in "" if desired).
 
-`DOCTYPE` should be the name of a template package.
-An example template package rushdoc is found in packages (see [Creating
-additional packages](#packages) for more info).
-The term "template package" here simply means a sty file that sets style
+`DOCTYPE` should be the name of a template class.
+An example template class rushdoc is found in classes (see [Creating
+additional classes](#classes) for more info).
+The term "template class" here simply means a cls file that sets style
 and formatting.
 
 The fonts can be any font installed on your machine. Title font controls
@@ -380,5 +380,5 @@ Now example.pdf can be generated:
 
 	buildtexpdf example
 
-## <a name="packages"></a>Creating Additional Packages
+## <a name="classes"></a>Creating Additional Classes
 TODO

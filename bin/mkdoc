@@ -64,9 +64,7 @@ else
 fi
 
 sed "s/\_/\\\_/g" > $projname/$projname.tex << _EOF_
-\documentclass$column{article}
-
-\usepackage{$DOCTYPE}
+\documentclass$column{$DOCTYPE}
 $font
 \title{$title}
 \author{$AUTHOR}
