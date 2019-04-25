@@ -114,7 +114,7 @@ and formatting.
 The fonts can be any font installed on your machine. Title font controls
 the font of the section headings as well as the title.
 
-### Exporting PDF
+### Exporting the PDF
 
 To export the new PDF to another directory (possibly a shared directory
 where you don't want the source code making a mess) on creation set
@@ -134,8 +134,9 @@ There are a couple ways to tell `buildtexpdf` where to copy the built PDF.
 If `EXPORTPATH` is a single path the file is sent to that path.
 This means the `EXPORTPATH` can be set in a local docsrc instead of the
 global docsrc.
-Additionally, all the paths can be set globally and the `EXPORTPATH` will
-be expected to be in the same order as `DOCPATH`.
+Additionally, all the paths can be set globally, in which case `EXPORTPATH`
+is expected to be in the same order as `DOCPATH` as in the example file
+above.
 In case there's uncertainty in if/where the PDF will be sent (or was sent
 if it didn't end up where it was supposed to), the dry run option can be
 passed to `buildtexpdf --dry-run`.
