@@ -31,6 +31,25 @@ else
 	column=''
 fi
 
+font="
+"
+if [ -n "$MAINFONT" ]; then
+	font=${font}"\\setmainfont{$MAINFONT}
+"
+else
+	font=""
+fi
+
+if [ -n "$TITLEFONT" ]; then
+	font=${font}"\\settitlefont{$TITLEFONT}
+"
+fi
+
+if [ -n "$EMAIL" ]; then
+	AUTHOR=${AUTHOR}" \\\\ email:
+	\\href{mailto:$EMAIL}{$EMAIL}"
+fi
+
 if $ADDABSTRACT; then
 	maketitle='\maketitleandabstract{}'
 else
@@ -48,13 +67,9 @@ sed "s/\_/\\\_/g" > $projname/$projname.tex << _EOF_
 \documentclass$column{article}
 
 \usepackage{$DOCTYPE}
-
-\setmainfont{$MAINFONT}
-\settitlefont{$TITLEFONT}
-
+$font
 \title{$title}
-\author{$AUTHOR \\\\ email:
-	\href{mailto:$EMAIL}{$EMAIL}}
+\author{$AUTHOR}
 
 \begin{document}
 	$topmatter
