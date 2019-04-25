@@ -1,13 +1,103 @@
 #!/bin/bash
 
+function usage {
+	cat << _EOF_
+	Usage: $(basename $0) [options] file
+
+	File should be the name of a LaTeX file in the current directory.
+	Additionally a docsrc should exist with a value for \$DOEXPORTPDF set.
+
+	Options
+		-h		Show this help
+		--dry-run	Display whether the created pdf would be exported and
+				where without creating it.
+_EOF_
+}
+
+function selectdocpath {
+	IFS=:
+	read -ra paths <<< "$DOCPATH"
+	index=0
+	out=
+
+	for p in ${paths[@]}; do
+		testpath=${p//\~/$HOME}
+		if [[ $PWD =~ $testpath ]]; then
+			out=($testpath $index)
+			break
+		fi
+		index=$(( $index + 1 ))
+	done
+	echo ${out[*]}
+}
+
+function selectexportpath {
+	index=$3
+	if [ -z $1 ] || [ -z $2 ]; then
+		echo
+	elif [[ $1 =~ : ]]; then
+		IFS=:
+		read -ra paths <<< "$1"
+		echo ${paths[$index]}
+	else
+		echo $1
+	fi
+}
+
+function echoexportpath {
+	if [ -z $EXPORTPATH ] || ! $DOEXPORTPDF; then
+		cat << _EOF_
+			PDF will not be exported. If this is not the expected response
+			check that \$DOEXPORTPDF is set to true in docsrc and that
+			\$EXPORTPATH is either a single path or has the same number of
+			paths as \$DOCPATH (and both are not blank).
+_EOF_
+	elif [ -z $docpatharray ]; then
+		echo PDF will not be exported. Could not find parent directory in \$DOCPATH.
+	else
+		echo PDF will be exported to $EXPORTPATH
+	fi
+
+		cat << _EOF_
+
+			For refernce the values for the current directory as of now are:
+				\$DOEXPORTPDF:	$DOEXPORTPDF
+				\$DOCPATH:	$DOCPATH
+				\$EXPORTPATH:	$EXPORTPATH
+_EOF_
+}
+
+if [ -z $# ]; then
+	usage
+	exit 1
+elif [ $1 == '-h' ]; then
+	usage
+	exit 0
+fi
+
 source ~/.config/docsrc
+docpatharray=($(selectdocpath))
+[ -f ${docpatharray[0]}/docsrc ] && source ${docpatharray[0]}/docsrc
 [ -f ../docsrc ] && source ../docsrc
 
-time latexmk -pv -xelatex -silent --interaction=nonstopmode $1
+if [ $1 == '--dry-run' ]; then
+	EXPORTPATH=$(selectexportpath $EXPORTPATH ${docpatharray[*]})
+	echoexportpath
+	exit 0
+fi
+
+time latexmk -pv -xelatex -silent --interaction=nonstopmode $1.tex
 printtexerrors $1
 
 if $DOEXPORTPDF; then
-	basepath=${$(dirname $1)//\./$PWD}
-	tailfilepath=${basepath#*$DOCDIR}
-	cp $1.pdf ${EXPORTDIR}${tailfilepath}.pdf
+	EXPORTPATH=$(selectexportpath $EXPORTPATH ${docpatharray[*]})
+	DOCPATH=${docpatharray[0]}
+
+	currentdir=$(dirname $1)
+	basepath=${currentdir//\./$PWD}
+	tailfilepath=${basepath#*$DOCPATH}
+	savepath=${EXPORTPATH}${tailfilepath}.pdf
+	savepath=${savepath//\~/$HOME}
+
+	cp $1.pdf $savepath
 fi

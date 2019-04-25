@@ -76,8 +76,16 @@ An example file docsrc should look like:
 	ADDABSTRACT=true
 
 	DOEXPORTPDF=true
-	DOCDIR=~/documents/documentation
-	EXPORTDIR=~/Dropbox/documentation
+	DOCPATH="~/documents/documentation:~/documents/presentations"
+	EXPORTPATH="~/Dropbox/documentation:~/Dropbox/presentations"
+
+Local docsrcs can be added to the parent directory of a project or into
+`DOCPATH` and will override the values for all projects in that directory.
+Only the variables to change need be set i.e. to change the author and
+email for one directory add to it a docsrc containing:
+
+	AUTHOR="Jane Smith"
+	EMAIL="jane_smith@netscape.com"
 
 The first five values may be left blank, resulting in empty values in the
 main file (that can be manually added later).
@@ -87,6 +95,7 @@ will fail unless when they are unset.
 `NUMBERPAGES` to `DOEXPORTPDF` should be either true or false (bash treats an
 unset vale as true).
 The remaining two options can be ignored when `DOEXPORTPDF` is false.
+(Although, `DOCPATH` affects where docsrc are looked for.)
 
 If `ADDABSTRACT` is true `\maketitleandabstract{filename}` is used in place
 off `\maketitle` where filename is the file containing the abstract located
@@ -105,22 +114,32 @@ and formatting.
 The fonts can be any font installed on your machine. Title font controls
 the font of the section headings as well as the title.
 
-To export the pdfs to another directory (possibly a shared directory where
-you don't want the source code making a mess) set `DOEXPORTPDF` to true and
-add the directory name where all the projects which are to be exported will
-be stored under `DOCDIR` and where the pdfs are to be copied in `EXPORTDIR`.
-This can be a multilevel hierarchy. For example `DOCDIR` may contain
-subdirectories for several groups of documentation. For every project
-created in one of these subdirectories, whenever the pdf is created with
-buildtexpdf it will be sent to `EXPORTDIR` with the same file tree.
+### Exporting PDF
 
-Local docsrcs can be added to the parent directory of a project and will
-override the values for all projects in that directory. Only the variables
-to change need be set i.e. to change the author and email for one directory
-add to it a docsrc containing:
+To export the new PDF to another directory (possibly a shared directory
+where you don't want the source code making a mess) on creation set
+`DOEXPORTPDF` to true and add the directory name where all the projects
+which are to be exported will be stored under `DOCPATH` and where the PDFs
+are to be copied in `EXPORTPATH`.
+This can be a multilevel hierarchy.
+For example `DOCPATH` may contain subdirectories for several groups of
+documentation. For every project created in one of these subdirectories,
+whenever the PDF is created with `buildtexpdf` it will be sent to
+`EXPORTPATH` with the same file tree.
 
-	AUTHOR="Jane Smith"
-	EMAIL="jane_smith@netscape.com"
+If documents are going to be stored in multiple directory hierarchies
+additional paths can be added to `DOCPATH` and `EXPORTPATH` separated by a
+":".
+There are a couple ways to tell `buildtexpdf` where to copy the built PDF.
+If `EXPORTPATH` is a single path the file is sent to that path.
+This means the `EXPORTPATH` can be set in a local docsrc instead of the
+global docsrc.
+Additionally, all the paths can be set globally and the `EXPORTPATH` will
+be expected to be in the same order as `DOCPATH`.
+In case there's uncertainty in if/where the PDF will be sent (or was sent
+if it didn't end up where it was supposed to), the dry run option can be
+passed to `buildtexpdf --dry-run`.
+This will print information about exporting the file without creating it.
 
 ## Use
 

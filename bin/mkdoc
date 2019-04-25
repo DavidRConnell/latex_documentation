@@ -1,6 +1,21 @@
 #!/bin/bash
 
+function selectdocpath {
+	IFS=g
+	read -ra paths <<< "$DOCPATH"
+
+	for p in ${paths[@]}; do
+		testpath=${p//\~/$HOME}
+		if [[ $PWD =~ $testpath ]]; then
+			echo $testpath
+		fi
+	done
+	echo ""
+}
+
 source ~/.config/docsrc
+docpath=$(selectdocpath)
+[ -f $docpath/docsrc ] && source $docpath/docsrc
 [ -f $PWD/docsrc ] && source $PWD/docsrc
 
 projname="$1"
