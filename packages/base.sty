@@ -1,0 +1,42 @@
+% Provides base package intended to add macros to set up packages and
+% classes for use with LaTeX documentation.
+
+% Use setmainfont and settitle to change the font. Similarly colors can
+% be set using the setcolor and hypersetup commands. Unset colors default
+% to black.
+
+\ProvidesPackage{base}
+
+% Colors
+\usepackage{xcolor}
+	\definecolor{defaultcolor}{gray}{0.0}
+	\newcommand{\titlecolor}{defaultcolor}
+	\newcommand{\sectioncolor}{defaultcolor}
+	\newcommand{\tablebgcolor}{defaultcolor}
+
+	\newcommand{\setcolor}[2]{%
+		\renewcommand{#1}{#2}
+	}
+
+% Set fonts
+\usepackage{fontspec}
+	\defaultfontfeatures{Ligatures=TeX}
+	\setmainfont{Helvetica Neue Light}
+	\setsansfont{Helvetica Neue Light}
+	\newfontfamily{\titlefont}{Helvetica Neue Light}
+
+	\newcommand{\settitlefont}[1]{%
+		\newfontfamily{\titlefont}{#1}
+	}
+
+% Reference colors
+\usepackage{hyperref}
+	\hypersetup{%
+		colorlinks,
+		linkcolor=defaultcolor,
+		citecolor=defaultcolor,
+		urlcolor=defaultcolor
+}
+
+\usepackage{standardmath}
+\usepackage{floatmacros}
