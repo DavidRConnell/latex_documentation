@@ -1,0 +1,40 @@
+\ProvidesPackage{presentation}
+
+\usepackage{base}
+
+% Wrapper so \maketitle creates the title slide.
+\renewcommand{\maketitle}{%
+	\frame{\titlepage}
+}
+
+% Set slides. Use sections folder to keep consistent with mkdoc setup.
+\usepackage{xifthen}
+\usepackage{mfirstuc}
+
+\makeatletter
+\newcommand{\inputslide}{%
+	\@ifstar\@inputslidea\@inputslideb
+}
+
+\newcommand{\@inputslidea}[1]{%
+	\begin{frame}
+		\include{./sections/#1}
+	\end{frame}
+}
+
+\newcommand{\@inputslideb}[2][]{%
+	\begin{frame}
+	\ifthenelse{\isempty{#1}}%
+		{\frametitle{\capitalisewords{#2}}%
+		\include{./sections/#2}}%
+		{\frametitle{#1}%
+		\include{./sections/#2}}%
+	\end{frame}
+}
+\makeatother
+
+\usepackage{fancyvrb}
+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{%
+	fontsize=\tiny, 
+	framesep=1em
+}
