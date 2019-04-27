@@ -1,21 +1,27 @@
 # LaTeX Documentation
 
-The goal of this package is to remove the redundancies in producing LaTeX
-documents and integrate MATLAB and python programs into LaTeX projects to
-ease adding plots and tables.
+The goal of this program is to remove the redundancies in producing LaTeX
+documents and to integrate MATLAB and python programs into LaTeX projects
+easing the embedding of high quality plots and tables.
+
 LaTeX allows for a lot of flexibility setting document style and
-formatting however, by default these settings must be recreated for each
-document as well as elements within documents, like floats.
+formatting however, by default these settings must be rewritten for each
+document as well as elements within documents, like writing float
+environments for every float when most of the environment block is the same
+for each figure or table.
+In addition to reducing typing and clutter, formatting settings are kept in
+a central location so changes only need to be made once instead of for
+every instance.
 This package generates tex files based on an rc file, leaving you to worry
 only about the documents content.
-Additionally, any template class can be used and, with a LaTeX
+Additionally, any template class can be used and, with some LaTeX
 background, new classes can be created from those provided.
 
 ## Installation
 
-This package requires a unix based file hierarchy, bash, and LaTeX.
-To install, cd into the parent directory yon want to use to store the
-package and run:
+This program requires a unix based file hierarchy, bash, and LaTeX.
+To install, cd into the parent directory you want to use to store the
+program and run:
 
 	git clone https://github.com/DavidRConnell/latex_documentation.git
 	./install.sh
@@ -31,7 +37,7 @@ figures run the following commands:
 
 Where the paths should be replaced with the desired locations which need to
 be in the MATLAB/python path or added to it.
-For MATLAB, if you don't know where to send link them, ~/Documents/MATLAB
+For MATLAB, if you don't know where to link the files, ~/Documents/MATLAB
 will likely be a good choice.
 Otherwise running the following commands in the MATLAB command line will
 add a new directory to MATLAB's path:
@@ -50,19 +56,20 @@ To add a new directory run:
 	export PYTHONPATH='path/to/dir':$PYTHONPATH
 
 This will not be saved once the session ends; add the above line to
-~/.bashrc or the analogous file for the shell you use.
+~/.bashrc or the analogous file for the shell you use to make the change
+persistent.
 
 **Note:** The [matlab2tikz](https://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz) package is needed for generating tikz figures in MATLAB and the
 [matplotlab2tikz](https://pypi.org/project/matplotlib2tikz/) is needed for
-python in addition to the matplotlib and numpy modules.
+python along with the matplotlib and numpy modules.
 
 ## Set up
 
 The docsrc file created in ~/.config sets global documentation options.
-Additionally, docsrc files can be made within the parent directory of a
-project to override the global file for all projects in the directory.
+Additionally, local docsrc files can be made to override the global file for
+projects below the file in the directory hierarchy.
 
-An example file docsrc should look like:
+An example docsrc file should look like:
 
 	AUTHOR="John Doe"
 	EMAIL="john_doe@aol.com"
@@ -80,22 +87,24 @@ An example file docsrc should look like:
 	EXPORTPATH="~/Dropbox/documentation:~/Dropbox/presentations"
 
 Local docsrcs can be added to the parent directory of a project or into
-`DOCPATH` and will override the values for all projects in that directory.
-Only the variables to change need be set i.e. to change the author and
-email for one directory add to it a docsrc containing:
+directory in `DOCPATH` and will override the values for all projects in
+that directory.
+Only the variables to change need be set i.e. to change the author and email
+for one directory create a docsrc containing:
 
 	AUTHOR="Jane Smith"
 	EMAIL="jane_smith@netscape.com"
 
 The first five values may be left blank, resulting in empty values in the
 main file (that can be manually added later).
-Leaving the doctype and fonts blank will still produce a main file but latexmk
-will fail unless when they are unset.
+The `mkdoc` command will still generate a main file with an unset doctype but
+`latexmk` will fail unless the class is set manually.
 
 `NUMBERPAGES` to `DOEXPORTPDF` should be either true or false (bash treats an
 unset vale as true).
-The remaining two options can be ignored when `DOEXPORTPDF` is false.
-(Although, `DOCPATH` affects where docsrc are looked for.)
+The remaining two options can safely be ignored when `DOEXPORTPDF` is false.
+(Although, `DOCPATH` affects where docsrc are looked for so there may still
+be a reason to set it.)
 
 If `ADDABSTRACT` is true `\maketitleandabstract{filename}` is used in place
 off `\maketitle` where filename is the file containing the abstract located
@@ -106,35 +115,41 @@ All values consisting of more than one word should be wrapped in "" (and
 all values can be wrapped in "" if desired).
 
 `DOCTYPE` should be the name of a template class.
-An example template class rushdoc is found in classes (see [Creating
-additional classes](#classes) for more info).
+Example template classes rushdoc and rushpresentation are contained in the
+classes directory (see [Creating additional classes](#classes) for more info).
 The term "template class" here simply means a cls file that sets style
 and formatting.
 
-The fonts can be any font installed on your machine. Title font controls
-the font of the section headings as well as the title.
+The fonts can be any font installed on your machine.
+Title font controls the font of the section headings as well as the title.
 
 ### Exporting the PDF
 
 To export the new PDF to another directory (possibly a shared directory
 where you don't want the source code making a mess) on creation set
 `DOEXPORTPDF` to true and add the directory name where all the projects
-which are to be exported will be stored under `DOCPATH` and where the PDFs
-are to be copied in `EXPORTPATH`.
+which are to be exported will be stored under to `DOCPATH` and the directory
+where the PDFs are to be copied into in `EXPORTPATH`.
 This can be a multilevel hierarchy.
 For example `DOCPATH` may contain subdirectories for several groups of
-documentation. For every project created in one of these subdirectories,
-whenever the PDF is created with `buildtexpdf` it will be sent to
+documentation.
+For every project in one of these subdirectories, whenever the PDF
+is created with `buildtexpdf` it will be copied to the appropriate
 `EXPORTPATH` with the same file tree.
+As an example if you are exporting the file in
+`~/Documents/papers/example` to the empty export path `~/Dropbox/Documents`
+and `DOCPATH` is set to `~/Documents` when the PDF is built it will be
+copied to `~/Dropbox/Documents/papers/example.pdf` creating the papers
+directory in the process.
 
 If documents are going to be stored in multiple directory hierarchies
-additional paths can be added to `DOCPATH` and `EXPORTPATH` separated by a
+additional paths can be appended to `DOCPATH` and `EXPORTPATH` separated by a
 ":".
 There are a couple ways to tell `buildtexpdf` where to copy the built PDF.
 If `EXPORTPATH` is a single path the file is sent to that path.
 This means the `EXPORTPATH` can be set in a local docsrc instead of the
 global docsrc.
-Additionally, all the paths can be set globally, in which case `EXPORTPATH`
+Alternatively, all the paths can be set globally, in which case `EXPORTPATH`
 is expected to be in the same order as `DOCPATH` as in the example file
 above.
 In case there's uncertainty in if/where the PDF will be sent (or was sent
@@ -155,8 +170,8 @@ directory with the given name populated with a sections directory and
 `projectname`.tex (what I refer to as the main file) generated using
 `title` and the values from docsrc.
 
-As an example the following creates an example project in the
-~/documentation directory:
+From here on out, usage will be explain by creating the project "example".
+To create the project in ~/documentation directory:
 
 	cd ~/documentation
 	mkdoc example "LaTeX Documentation Example"
@@ -170,13 +185,14 @@ At this time the file tree looks like:
 
 Running `buildtexpdf example` should produce example.pdf.
 
-**Note:** Adding a docsrc to example would not make any changes. For settings
-that affect all (and only) projects within ~/documentation a docsrc should
-be added to ~/documentation/docsrc.
+**Note:** Adding a docsrc to example would not make any changes.
+For settings that affect all (and only) projects within ~/documentation a
+docsrc should be added to ~/documentation/docsrc.
 
 ### <a name="addcontent"></a>Adding content
 
-Sections added to the sections directory can be input to the project with:
+Sections added to the sections directory can be input to the project by
+adding to the main file:
 
 	...
 	\begin{document}
@@ -186,8 +202,7 @@ Sections added to the sections directory can be input to the project with:
 		\inputsection[optional name]{filename}
 	\end{document}
 
-In the main file.
-If no optional name is included the section will be named as the
+If no optional name is included, the section will be named as the
 capitalized file name otherwise the optional name is used.
 In addition to the plain `\inputsection` macro, a star version (i.e.
 `\inputsection*{filename}`) exist which does not add a section header.
@@ -197,9 +212,10 @@ no need to prepend sections to the filename nor do you need to add the tex
 extension.
 
 Similarly, there are `inputsubsection` and `inputappendix` macros.
-Subsection should be kept in the sections directory and appendices a
+Subsection should be kept in the sections directory and appendices in an
 appendices directory.
-Include the appendix switch before inputing any appendices.
+The appendix switch is needed before inputing any appendices to tell LaTeX
+to start numbering the sections as appendices.
 In the main file add:
 
 	...
@@ -209,12 +225,10 @@ In the main file add:
 		\inputappendix[optional name]{filename}
 	\end{document}
 
-This changes tells LaTeX to start numbering new sections as appendices.
-
 ### Generating floats
 
 If the MATLAB and/or python files have been installed plots can be saved as
-tikz figures and matrices and numpy arrays can be saved in LaTeX table
+tikz figures, and matrices and numpy arrays can be saved in LaTeX table
 format.
 These files are saved to the figures and tables subdirectories respectively
 within the provided LaTeX project.
@@ -318,7 +332,7 @@ Tables are expected to be in ./tables and figures in ./figures.
 File extensions are not needed.
 If there are multiple figures with the same name but different extensions
 the extension with the highest priority will be chosen starting with .pgf
-then .tex.
+then .tex after that LaTeX makes the decision based on its own criteria.
 
 The labels and captions are not required.
 If labels are used `\autoref{fig:ex}` can be used to reference them in the
@@ -373,7 +387,7 @@ example.tex
 		\pagenumbering{gobble}
 		\maketitle
 
-		\inputsection[Adding Floats]{addingfloats}
+		\inputsection[Add Floats]{addingfloats}
 	\end{document}
 
 Now example.pdf can be generated:
@@ -383,9 +397,8 @@ Now example.pdf can be generated:
 ## <a name="classes"></a>Creating Additional Classes and Packages
 
 Creating classes gives you control over document style and formatting.
-Any class which uses the base.sty (included in this project) package
-(directly or through another package which calls it) can be used as the
-doctype.
+Any class which uses the base.sty package (included as part of this program),
+directly or through another package which calls it, can be used as a doctype.
 The base.sty package sets up the fonts, colors, and calls other LaTeX
 packages that I always want when writing papers.
 All the macros needed for using this project are available after base.sty
@@ -395,29 +408,30 @@ The packages paperformat.sty and presentation.sty extend base.sty to
 include functionality specifically for writing papers and presentations
 respectively.
 Despite papers and presentations having different elements (sections vs
-slides) I choose to write the presentations.sty using paper vocabulary to
+slides) I chose to write the presentations.sty using paper vocabulary to
 prevent having to add conditions to automation code.
-By adding a `\maketitle` command and using sections instead of slides mkdoc
-can be used without modification with this doctype, similarly extra macros
-do not need to be added to any completion functions created to work with
-this project.
+By adding a `\maketitle` command and using sections instead of slides in
+presentation.sty mkdoc can be used without modification for presentation
+doctypes.
+Similarly, extra macros and logic do not need to be added to any completion
+functions written to work with this project for each doctype.
 In short, it is not required to keep create the same macros for all
 doctypes but it will keep things simple.
 
 **Note:** If you want to make changes to any of the packages above, such as
 changing how sections are formatted, I suggest creating a new package that
 calls the to-be-modified package and redefining macros (with
-`\renewcommand`) and resetting values or doing the same inside a class.
+`\renewcommand`) and resetting values there or doing the same inside a class.
 This will prevent any updates to this project from overwriting your
 changes.
 
-Now that we have our desired packages, we can design our new classes.
+Now that we have our desired packages, we can design new classes.
 Using the two provided classes as templates should be enough to make new
 ones but for more information on creating classes see
 [overleaf](https://www.overleaf.com/learn/latex/Writing_your_own_class).
 
 I try to keep classes simple, subclassing a standard class then importing
-either the base.sty package or one of its derivatives then setting values
+either the base.sty package or one of its derivatives and setting values
 from the base.sty and floatmacros.sty packages.
 The values intended to be modified are colors: `\titlecolor`,
 `\sectioncolor`, and `\tablebgcolor`; and `\tablewidth`, `\figwidth`.
