@@ -380,5 +380,51 @@ Now example.pdf can be generated:
 
 	buildtexpdf example
 
-## <a name="classes"></a>Creating Additional Classes
-TODO
+## <a name="classes"></a>Creating Additional Classes and Packages
+
+Creating classes gives you control over document style and formatting.
+Any class which uses the base.sty (included in this project) package
+(directly or through another package which calls it) can be used as the
+doctype.
+The base.sty package sets up the fonts, colors, and calls other LaTeX
+packages that I always want when writing papers.
+All the macros needed for using this project are available after base.sty
+is called.
+
+The packages paperformat.sty and presentation.sty extend base.sty to
+include functionality specifically for writing papers and presentations
+respectively.
+Despite papers and presentations having different elements (sections vs
+slides) I choose to write the presentations.sty using paper vocabulary to
+prevent having to add conditions to automation code.
+By adding a `\maketitle` command and using sections instead of slides mkdoc
+can be used without modification with this doctype, similarly extra macros
+do not need to be added to any completion functions created to work with
+this project.
+In short, it is not required to keep create the same macros for all
+doctypes but it will keep things simple.
+
+**Note:** If you want to make changes to any of the packages above, such as
+changing how sections are formatted, I suggest creating a new package that
+calls the to-be-modified package and redefining macros (with
+`\renewcommand`) and resetting values or doing the same inside a class.
+This will prevent any updates to this project from overwriting your
+changes.
+
+Now that we have our desired packages, we can design our new classes.
+Using the two provided classes as templates should be enough to make new
+ones but for more information on creating classes see
+[overleaf](https://www.overleaf.com/learn/latex/Writing_your_own_class).
+
+I try to keep classes simple, subclassing a standard class then importing
+either the base.sty package or one of its derivatives then setting values
+from the base.sty and floatmacros.sty packages.
+The values intended to be modified are colors: `\titlecolor`,
+`\sectioncolor`, and `\tablebgcolor`; and `\tablewidth`, `\figwidth`.
+Colors are set with the `\setcolor{colormacro}{color}` macro and float
+widths are set with `\settablewidth` and `setfigwidth`.
+These values can be set in packages, classes, or on a project basis.
+You may also want to set other package options such as hypertext colors,
+section formatting, headers, etc.
+Again you have the option of where to set these based on how frequently the
+settings are wanted and what type of documents should have them.
