@@ -8,8 +8,10 @@ function missinglatex {
 	exit 1
 }
 
-TEXDIR=$(kpsewhich -expand-var '$TEXMFHOME') || false
-[ -d $TEXDIR ] || missinglatex
+TEXDIR=$(kpsewhich -expand-var '$TEXMFHOME') || missinglatex
 
 TEXDIR=$TEXDIR/tex/latex
 BINDIR=/usr/local/bin
+
+[ -d $TEXDIR ] || mkdir -p $TEXDIR
+[ -d $BINDIR ] || mkdir -p $BINDIR
