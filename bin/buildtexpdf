@@ -99,5 +99,5 @@ if $DOEXPORTPDF; then
 	savepath=${EXPORTPATH}${tailfilepath}.pdf
 	savepath=${savepath//\~/$HOME}
 
-	cp $1.pdf $savepath
+	rsync $1.pdf $savepath
 fi
