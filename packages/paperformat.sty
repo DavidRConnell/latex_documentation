@@ -18,20 +18,22 @@
 \setlength{\defaultbaselineskip}{\baselineskip}
 
 \renewcommand{\maketitle}{%
-\setlength\baselineskip{3em}
-\makeatletter
-\noindent
-{\huge\textbf{\color{\titlecolor}\titlefont\@title}} \\[0.25em]
-{\large\@author} \\
-{\large\@date} \\[-1.5em]
-\makeatother
-\setlength\baselineskip{\defaultbaselineskip}
+	\setlength\baselineskip{3em}
+	\makeatletter
+	\noindent
+	{\huge\textbf{\color{\titlecolor}\titlefont\@title}} \\[0.25em]
+	{\large\@author} \\[-1em]
+	{\large\@date} \\
+	\makeatother
+	\setlength\baselineskip{\defaultbaselineskip}
 }
 
 \renewcommand{\abstract}[1]{%
-\rule{\textwidth}{0.25mm}
-\emph{\input{./sections/Abstract}}
-\rule{\textwidth}{0.25mm}
+	\vspace{1.5em}
+	\rule{\textwidth}{0.25mm}\\
+	\emph{\input{./sections/Abstract}}\\
+	\vspace{-0.5em}
+	\rule{\textwidth}{0.25mm}
 }
 
 \newcommand{\maketitleandabstract}[1]{%
