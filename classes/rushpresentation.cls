@@ -30,3 +30,4 @@
 }
 
 \setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle}{\color{\titlecolor}\textbf{\small\insertframetitle}}
