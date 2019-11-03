@@ -18,24 +18,40 @@
 \usepackage[font=footnotesize, labelfont=bf]{caption}
 \usepackage{subcaption}
 
+\usepackage{xifthen}
+
 \newlength{\figwidth}
 \setlength{\figwidth}{0.8\columnwidth}
 \newcommand{\setfigwidth}[1]{\setlength{\figwidth}{#1}}
 \newcommand{\inputfigure}[2][]{%
-  \begin{figure}[ht]
-    \centering
-		\addfigure{\figwidth}{#2}
-    \caption{#1}
-  \end{figure}
+	\ifthenelse{\isempty{#1}}%
+	{\begin{figure}[ht]
+			\centering
+			\addfigure{\figwidth}{#2}
+		\end{figure}
+	}%
+	{\begin{figure}[ht]
+			\centering
+			\addfigure{\figwidth}{#2}
+			\caption{#1}
+		\end{figure}
+	}
 }
 
 \newcommand{\addfigure}[2]{%
-  \IfFileExists{./figures/#2.pgf}{
-     \resizebox{#1}{!}{\input{./figures/#2.pgf}}
-  }{\IfFileExists{./figures/#2.tex}{
-    \resizebox{#1}{!}{\input{./figures/#2.tex}}
-  }{\includegraphics[width=#1]{./figures/#2}}
-}}
+	\IfFileExists{./figures/#2.tex}{
+		\resizebox{#1}{!}{\input{./figures/#2.tex}}
+	}{\IfFileExists{./figures/#2.pgf}{
+			\resizebox{#1}{!}{\input{./figures/#2.pgf}}
+		}{\includegraphics[width=#1]{./figures/#2}}
+	}}
+
+\captionsetup[subfigure]{%
+	labelformat=simple,
+	labelsep=space,
+	justification=raggedright,
+	singlelinecheck=off
+}
 
 \makeatletter
 \newcommand{\inputsubfigure}{%
@@ -44,45 +60,75 @@
 }
 
 \newcommand{\@inputsubfigureh}[3][]{
-	\begin{subfigure}[t]{#2}
-		\centering
-		\addfigure{\textwidth}{#3}
-		\vspace{-1.5em}
-		\caption{\footnotesize{#1}}
-	\end{subfigure}%
+	\ifthenelse{\isempty{#1}}%
+	{\begin{subfigure}[t]{#2}
+			\centering
+			\addfigure{\textwidth}{#3}
+		\end{subfigure}%
+	}
+	{\begin{subfigure}[t]{#2}
+			\centering
+			\caption{\footnotesize{#1}}
+			\vspace{-1.5em}
+			\addfigure{\textwidth}{#3}
+			\vspace{-1.5em}
+		\end{subfigure}%
+	}
 }
 
 \newcommand{\@inputsubfigurev}[3][]{
-	\begin{subfigure}[t]{#2}
-		\centering
-		\addfigure{\textwidth}{#3}
-		\vspace{-1.5em}
-		\caption{\footnotesize#1}
-	\end{subfigure}\\[1.25em]
+	\ifthenelse{\isempty{#1}}%
+	{\begin{subfigure}[t]{#2}
+			\centering
+			\addfigure{\textwidth}{#3}
+		\end{subfigure}\\
+	}
+	{\begin{subfigure}[t]{#2}
+			\centering
+			\caption{\footnotesize{#1}}
+			\vspace{-1.5em}
+			\addfigure{\textwidth}{#3}
+			\vspace{-1.5em}
+		\end{subfigure}\\
+	}
 }
+
 \makeatother
 
 \usepackage{threeparttable}
 \usepackage{booktabs}
 \usepackage{tabularx}
-  \captionsetup[table]{%
-    labelsep=space,
-    justification=raggedright,
-    singlelinecheck=off
-  }
+\captionsetup[table]{%
+	labelsep=space,
+	justification=raggedright,
+	singlelinecheck=off
+}
 
 \newlength{\tablewidth}
 \setlength{\tablewidth}{\linewidth}
 \newcommand{\settablewidth}[1]{\setlength{\tablewidth}{#1}}
 \newcommand{\inputtable}[2][]{%
-  \begin{table*}[tb]
-    \centering
-    \large
-    \colorbox{\tablebgcolor}{%
-      \begin{threeparttable}
-        \caption{#1}
-        \input{./tables/#2}
-      \end{threeparttable}
-    }
-  \end{table*}
+	\ifthenelse{\isempty{#1}}%
+	{\begin{table*}[tb]
+			\centering
+			\large
+			\colorbox{\tablebgcolor}{%
+				\begin{threeparttable}
+					\input{./tables/#2}
+				\end{threeparttable}
+			}
+		\end{table*}
+	}
+
+	{\begin{table*}[tb]
+			\centering
+			\large
+			\colorbox{\tablebgcolor}{%
+				\begin{threeparttable}
+					\caption{#1}
+					\input{./tables/#2}
+				\end{threeparttable}
+			}
+		\end{table*}
+	}
 }
