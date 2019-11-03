@@ -28,3 +28,5 @@
 	urlcolor=rushlightblue,
 	citecolor=rushlightblue
 }
+
+\setbeamertemplate{navigation symbols}{}
