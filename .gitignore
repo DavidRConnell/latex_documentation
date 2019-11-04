@@ -1,2 +1,4 @@
 docsrc
 packages/researchpaper.sty
+*.log
+**/.auctex-auto
