@@ -1,7 +1,7 @@
 #!/bin/bash
 
-[ -d ~/.config ] || mkdir ~/.config
-[ -f ~/.config/docsrc ] && exit 0
+[ -d ~/.config ] || mkdir -p ~/.config/latexdocs
+[ -f ~/.config/latexdocs/docsrc ] && exit 0
 
 cat > ~/.config/docsrc <<- _EOF_
 	# Document variables.

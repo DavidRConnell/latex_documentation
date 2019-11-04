@@ -13,7 +13,7 @@ function selectdocpath {
 	echo ""
 }
 
-source ~/.config/docsrc
+source ~/.config/latexdocs/docsrc
 docpath=$(selectdocpath)
 [ -f $docpath/docsrc ] && source $docpath/docsrc
 [ -f $PWD/docsrc ] && source $PWD/docsrc
@@ -24,6 +24,7 @@ title="$@"
 
 mkdir $projname
 mkdir $projname/sections
+cp ~/.config/latexdocs/gitignore $projname/.gitignore
 
 if $USETWOCOLUMN; then
 	column='[twocolumn]'
