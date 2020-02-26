@@ -19,3 +19,7 @@
 	urlcolor=rushlightblue,
 	citecolor=rushlightblue
 }
+
+\setmainfont{Noto Serif}
+\settitlefont{Noto Sans}
+\pagenumbering{gobble}

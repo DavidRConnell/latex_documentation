@@ -7,6 +7,9 @@
 \usetheme{Madrid}
 
 \RequirePackage{presentation}
+\usefonttheme{serif}
+\setmainfont{Noto Serif}
+\settitlefont{Noto Sans}
 
 \definecolor{rushgreen}{HTML}{1d6f42}
 \definecolor{rushlightblue}{HTML}{436092}
