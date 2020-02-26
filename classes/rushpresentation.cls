@@ -29,9 +29,9 @@
 \setbeamercolor{subsection in head/foot}{bg=rushlightblue,fg=white}
 
 \hypersetup{
-	linkcolor=white,
-	urlcolor=rushlightblue,
-	citecolor=rushlightblue
+  linkcolor=white,
+  urlcolor=rushlightblue,
+  citecolor=rushlightblue
 }
 
 \setbeamertemplate{frametitle}{%

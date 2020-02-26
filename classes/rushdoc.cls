@@ -17,9 +17,9 @@
 \setcolor{\tablebgcolor}{tablegray}
 
 \hypersetup{
-	linkcolor=rushlightblue,
-	urlcolor=rushlightblue,
-	citecolor=rushlightblue
+  linkcolor=rushlightblue,
+  urlcolor=rushlightblue,
+  citecolor=rushlightblue
 }
 
 \setmainfont{Noto Serif}

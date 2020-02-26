@@ -9,30 +9,30 @@
 
 % Colors
 \usepackage{xcolor}
-	\definecolor{defaultcolor}{gray}{0.0}
-	\newcommand{\titlecolor}{defaultcolor}
-	\newcommand{\sectioncolor}{defaultcolor}
-	\newcommand{\tablebgcolor}{defaultcolor}
+\definecolor{defaultcolor}{gray}{0.0}
+\newcommand{\titlecolor}{defaultcolor}
+\newcommand{\sectioncolor}{defaultcolor}
+\newcommand{\tablebgcolor}{defaultcolor}
 
-	\newcommand{\setcolor}[2]{%
-		\renewcommand{#1}{#2}
-	}
+\newcommand{\setcolor}[2]{%
+  \renewcommand{#1}{#2}
+}
 
 % Set fonts
 \usepackage{fontspec}
-	\defaultfontfeatures{Ligatures=TeX}
+\defaultfontfeatures{Ligatures=TeX}
 
-	\newcommand{\settitlefont}[1]{%
-		\newfontfamily{\titlefont}{#1}
-	}
+\newcommand{\settitlefont}[1]{%
+  \newfontfamily{\titlefont}{#1}
+}
 
 % Reference colors
 \usepackage{hyperref}
-	\hypersetup{%
-		colorlinks,
-		linkcolor=defaultcolor,
-		citecolor=defaultcolor,
-		urlcolor=defaultcolor
+\hypersetup{%
+  colorlinks,
+  linkcolor=defaultcolor,
+  citecolor=defaultcolor,
+  urlcolor=defaultcolor
 }
 
 \usepackage{standardmath}

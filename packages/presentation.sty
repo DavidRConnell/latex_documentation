@@ -4,7 +4,7 @@
 
 % Wrapper so \maketitle creates the title slide.
 \renewcommand{\maketitle}{%
-	\frame{\titlepage}
+  \frame{\titlepage}
 }
 
 % Set slides. Use sections folder to keep consistent with mkdoc setup.
@@ -13,7 +13,7 @@
 
 \makeatletter
 \newcommand{\inputsection}{%
-	\@ifstar\@inputslidea\@inputslideb
+  \@ifstar\@inputslidea\@inputslideb
 }
 
 \newcommand{\@inputslidea}[1]{%
@@ -23,9 +23,9 @@
 \newcommand{\@inputslideb}[3][]{%
   \ifthenelse{\isempty{#1}}%
   {\nextsection{#2}%
-	\include{./sections/#3}}%
+    \include{./sections/#3}}%
   {\nextsection[#1]{#2}%
-	\include{./sections/#3}}%
+    \include{./sections/#3}}%
 }
 \makeatother
 
@@ -41,8 +41,8 @@
 
 \usepackage{fancyvrb}
 \RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{%
-	fontsize=\tiny, 
-	framesep=1em
+  fontsize=\tiny,
+  framesep=1em
 }
 
 \setbeamertemplate{navigation symbols}{}

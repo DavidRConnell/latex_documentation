@@ -3,11 +3,11 @@
 %
 % Example of inputting subfigures. Displays a and b over c.
 % \begin{figure}[ht]
-% \centering
+% 	\centering
 % 	\inputsubfigure[caption a]{0.4\textwidth}{figa}
 % 	\inputsubfigure*[caption b]{0.4\textwidth}{figb}
 % 	\inputsubfigure[caption c]{\figwidth}{figc}
-% \caption{Combine caption}
+%  \caption{Combine caption}
 % \end{figure}
 
 \ProvidesPackage{floatmacros}
@@ -23,69 +23,69 @@
 \newcommand{\figwidth}{0.8\columnwidth}
 \newcommand{\setfigwidth}[1]{\renewcommand{\figwidth}{#1}}
 \newcommand{\inputfigure}[2][]{%
-	\ifthenelse{\isempty{#1}}%
-	{\begin{figure}[ht]
-			\centering
-			\addfigure{\figwidth}{#2}
-		\end{figure}
-	}%
-	{\begin{figure}[ht]
-			\centering
-			\addfigure{\figwidth}{#2}
-			\caption{#1}
-		\end{figure}
-	}
+  \ifthenelse{\isempty{#1}}%
+  {\begin{figure}[ht]
+	  \centering
+	  \addfigure{\figwidth}{#2}
+	\end{figure}
+  }%
+  {\begin{figure}[ht]
+	  \centering
+	  \addfigure{\figwidth}{#2}
+	  \caption{#1}
+	\end{figure}
+  }
 }
 
 \newcommand{\addfigure}[2]{%
-	\IfFileExists{./figures/#2.tex}{
-		\resizebox{#1}{!}{\input{./figures/#2.tex}}
-	}{\IfFileExists{./figures/#2.pgf}{
-			\resizebox{#1}{!}{\input{./figures/#2.pgf}}
-		}{\includegraphics[width=#1]{./figures/#2}}
-	}}
+  \IfFileExists{./figures/#2.tex}{
+	\resizebox{#1}{!}{\input{./figures/#2.tex}}
+  }{\IfFileExists{./figures/#2.pgf}{
+	  \resizebox{#1}{!}{\input{./figures/#2.pgf}}
+	}{\includegraphics[width=#1]{./figures/#2}}
+  }}
 
 \captionsetup[subfigure]{%
-	labelformat=simple,
-	labelsep=space,
-	justification=raggedright,
-	singlelinecheck=off
+  labelformat=simple,
+  labelsep=space,
+  justification=raggedright,
+  singlelinecheck=off
 }
 
 \makeatletter
 \newcommand{\inputsubfigure}{%
-	\Large
-	\@ifstar\@inputsubfigurev\@inputsubfigureh
+  \Large
+  \@ifstar\@inputsubfigurev\@inputsubfigureh
 }
 
 \newcommand{\@inputsubfigureh}[3][]{
-	\ifthenelse{\isempty{#1}}%
-	{\begin{subfigure}[t]{#2}
-			\centering
-			\addfigure{\textwidth}{#3}
-		\end{subfigure}%
-	}
-	{\begin{subfigure}[t]{#2}
-			\centering
-			\addfigure{\textwidth}{#3}
-			\caption{\footnotesize{#1}}
-		\end{subfigure}%
-	}
+  \ifthenelse{\isempty{#1}}%
+  {\begin{subfigure}[t]{#2}
+	  \centering
+	  \addfigure{\textwidth}{#3}
+	\end{subfigure}%
+  }
+  {\begin{subfigure}[t]{#2}
+	  \centering
+	  \addfigure{\textwidth}{#3}
+	  \caption{\footnotesize{#1}}
+	\end{subfigure}%
+  }
 }
 
 \newcommand{\@inputsubfigurev}[3][]{
-	\ifthenelse{\isempty{#1}}%
-	{\begin{subfigure}[t]{#2}
-			\centering
-			\addfigure{\textwidth}{#3}
-		\end{subfigure}\\
-	}
-	{\begin{subfigure}[t]{#2}
-			\centering
-			\addfigure{\textwidth}{#3}
-			\caption{\footnotesize{#1}}
-		\end{subfigure}\\
-	}
+  \ifthenelse{\isempty{#1}}%
+  {\begin{subfigure}[t]{#2}
+	  \centering
+	  \addfigure{\textwidth}{#3}
+	\end{subfigure}\\
+  }
+  {\begin{subfigure}[t]{#2}
+	  \centering
+	  \addfigure{\textwidth}{#3}
+	  \caption{\footnotesize{#1}}
+	\end{subfigure}\\
+  }
 }
 
 \makeatother
@@ -94,36 +94,36 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \captionsetup[table]{%
-	labelsep=space,
-	justification=raggedright,
-	singlelinecheck=off
+  labelsep=space,
+  justification=raggedright,
+  singlelinecheck=off
 }
 
 \newlength{\tablewidth}
 \setlength{\tablewidth}{\linewidth}
 \newcommand{\settablewidth}[1]{\setlength{\tablewidth}{#1}}
 \newcommand{\inputtable}[2][]{%
-	\ifthenelse{\isempty{#1}}%
-	{\begin{table*}[tb]
-			\centering
-			\large
-			\colorbox{\tablebgcolor}{%
-				\begin{threeparttable}
-					\input{./tables/#2}
-				\end{threeparttable}
-			}
-		\end{table*}
-	}
+  \ifthenelse{\isempty{#1}}%
+  {\begin{table*}[tb]
+	  \centering
+	  \large
+	  \colorbox{\tablebgcolor}{%
+		\begin{threeparttable}
+		  \input{./tables/#2}
+		\end{threeparttable}
+	  }
+	\end{table*}
+  }
 
-	{\begin{table*}[tb]
-			\centering
-			\large
-			\colorbox{\tablebgcolor}{%
-				\begin{threeparttable}
-					\caption{#1}
-					\input{./tables/#2}
-				\end{threeparttable}
-			}
-		\end{table*}
-	}
+  {\begin{table*}[tb]
+	  \centering
+	  \large
+	  \colorbox{\tablebgcolor}{%
+		\begin{threeparttable}
+		  \caption{#1}
+		  \input{./tables/#2}
+		\end{threeparttable}
+	  }
+	\end{table*}
+  }
 }
