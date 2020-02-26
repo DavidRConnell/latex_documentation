@@ -20,9 +20,8 @@
 
 \usepackage{xifthen}
 
-\newlength{\figwidth}
-\setlength{\figwidth}{0.8\columnwidth}
-\newcommand{\setfigwidth}[1]{\setlength{\figwidth}{#1}}
+\newcommand{\figwidth}{0.8\columnwidth}
+\newcommand{\setfigwidth}[1]{\renewcommand{\figwidth}{#1}}
 \newcommand{\inputfigure}[2][]{%
 	\ifthenelse{\isempty{#1}}%
 	{\begin{figure}[ht]
