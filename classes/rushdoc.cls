@@ -10,6 +10,8 @@
 \definecolor{rushgreen}{HTML}{1d6f42}
 \definecolor{rushlightblue}{HTML}{436092}
 \definecolor{tablegray}{gray}{0.8}
+\definecolor{accentblue}{HTML}{436092}
+\definecolor{accentred}{HTML}{9d4329}
 
 \setcolor{\titlecolor}{rushgreen}
 \setcolor{\tablebgcolor}{tablegray}
