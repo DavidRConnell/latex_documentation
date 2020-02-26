@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{rushpresentation}
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
 \ProcessOptions\relax
 \LoadClass{beamer}
 \usetheme{Madrid}
@@ -29,10 +29,15 @@
 \setbeamercolor{subsection in head/foot}{bg=rushlightblue,fg=white}
 
 \hypersetup{
-	linkcolor=rushlightblue,
+	linkcolor=white,
 	urlcolor=rushlightblue,
 	citecolor=rushlightblue
 }
 
-\setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{frametitle}{\color{\titlecolor}\textbf{\small\insertframetitle}}
+\setbeamertemplate{frametitle}{%
+  \textbf{\titlefont\color{\titlecolor}\small\insertframetitle}\\
+  {\color{black}\footnotesize\insertframesubtitle}
+}
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{itemize items}[square]
+

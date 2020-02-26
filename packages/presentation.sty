@@ -17,24 +17,32 @@
 }
 
 \newcommand{\@inputslidea}[1]{%
-	\begin{frame}
-		\include{./sections/#1}
-	\end{frame}
+  \include{./sections/#1}
 }
 
-\newcommand{\@inputslideb}[2][]{%
-	\begin{frame}
-	\ifthenelse{\isempty{#1}}%
-		{\frametitle{\capitalisewords{#2}}%
-		\include{./sections/#2}}%
-		{\frametitle{#1}%
-		\include{./sections/#2}}%
-	\end{frame}
+\newcommand{\@inputslideb}[3][]{%
+  \ifthenelse{\isempty{#1}}%
+  {\nextsection{#2}%
+	\include{./sections/#3}}%
+  {\nextsection[#1]{#2}%
+	\include{./sections/#3}}%
 }
 \makeatother
+
+\newcommand{\nextsection}[2][]{%
+  \begin{frame}
+    \vfill
+    \centering
+    \titlefont{\LARGE{\color{rushgreen}\textbf{#2}}}\\
+    #1
+    \vfill
+  \end{frame}
+}
 
 \usepackage{fancyvrb}
 \RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{%
 	fontsize=\tiny, 
 	framesep=1em
 }
+
+\setbeamertemplate{navigation symbols}{}
